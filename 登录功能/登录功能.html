@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery强化练习</title>
+    <script src="./images/jquery-3.4.1.min.js"></script>
+    <style>
+        body,ul,ol,li,img{
+            margin: 0;
+            padding: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .box{
+            width: 1000px;
+            height: 650px;
+            background-color: #f4f4f4;
+            margin: 0 auto;
+            position: relative;
+        }
+        .box .banner{
+            width: 1000px;
+            height: 320px;
+            position: relative;
+        }
+        .box .banner .img-list li img{
+            position: absolute;
+            transition: all 1s;
+        }
+        .box .banner .round{
+            position: absolute;
+            left: 30px;
+            bottom: 40px;
+        }
+        .box .banner .round ul li{
+            width: 30px;
+            height: 5px;
+            background: #f5f5f5;
+            float: left;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .box .banner .round ul li:hover{
+            background-color: #f40;
+        }
+        .box .business{
+            width: 679px;
+            height: 300px;
+            box-sizing: border-box;
+            background-color: #fff;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        .box .business .company{
+            height: 100%;
+            width: 226px;
+            box-sizing: border-box;
+            border-right: 1px solid #f5f5f5;
+            float: left;
+            padding: 25px;
+        }
+        .box .business .company .company-list{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .box .business .company .company-list .company-title{
+            font-size: 18px;
+            text-align: center;
+            line-height: 20px;
+            white-space: nowrap;
+        }
+        .box .business .company .company-list .company-desc{
+            height: 50px;
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            line-height: 25px;
+            margin-top: 25px;
+        }
+        .box .business .company .company-list .company-img{
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            margin-left: -35px;
+        }
+        .box .before{
+            width: 260px;
+            height: 300px;
+            margin-top: 30px;
+            background-color: #fff;
+            position: absolute;
+            top: 320px;
+            right: 0px;
+            /* display: none; */
+        }
+        .box .before .before-img{
+            width: 300px;
+            height: 100px;
+            position: relative;
+        }
+        .box .before .before-img img{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 50%;
+            right: 44%;
+        }
+        .box .before .before-title{
+            width: 300px;
+            height: 20px;
+            font-size: 15px;
+            text-align: center;
+            margin-right: 5px;
+        }
+        .box .before .login-register{
+            width: 240px;
+            height: 35px;
+        }
+        .box .before .login-register .login{
+            width: 90px;
+            height: 37px;
+            float: left;
+            margin-left: 45px;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 35px;
+            background-color:#FF6A00;
+        }
+        .box .before .login-register .login a{
+            color: white;
+        }
+        .box .before .login-register .register{
+            width: 90px;
+            height: 35px;
+            border: 1px solid #FF6A00;
+            float: left;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            margin-top: 20px;
+        }
+        .box .before .login-register .register a{
+            color: #ff6a00;
+        }
+        .box .before .low{
+            width: 243px;
+            height: 60px; 
+            border-top: 1px solid #eee;
+            font-size: 13px;
+            text-align: center;
+            line-height: 60px;
+            position: absolute;
+            bottom: 0;
+            margin-left: 15px;
+        }
+        .box .before .low a{
+            color: #ff6a00;
+        }
+        .box .before .low span{
+            color: #999;
+        }
+        .box .user{
+            height: 300px;
+            width: 260px;
+            margin-top: 30px;
+            background-color: #fff;
+            position: absolute;
+            top:320px;
+            right: 0;
+            border:1px solid #eee;
+            display: none;
+        }
+        .box .user .user-img{
+            width: 240px;
+            height: 75px;
+            position: relative;
+        }
+        .box .user .user-img .avatar{
+            width: 50px;
+            height: 50px;
+            position:absolute;
+            top: 30%;
+            right: 32%;
+        }
+        .box .user .user-title{
+            width: 240px;
+            height: 20px;
+            font-size: 14px;
+            text-align: center;
+            margin-left: 15px;
+        }
+        .box .user .user-photo{
+            width: 240px;
+            height: 35px;
+        }
+        .box .user .user-ph{
+            width: 75px;
+            height: 25px;
+            float: left;
+            margin: 4px 95px;
+            text-align: center;
+            line-height: 25px;
+            border: 1px solid #ff6a00; 
+            font-size: 14px;
+        }
+        .box .user .user-ph a{
+            color: #FF6A00;
+        }
+        .box .user .user-fool{
+            width: 240px;
+            height: 25px;
+            position:absolute;
+            font-size: 14px;
+            top: 51%;
+            right:0;
+        }
+        .box .user .user-fool div{
+            color: #FF6A00;
+            margin-left: 110px;
+        }
+        .box .user .user-low{
+            width: 260px;
+            height: 115px;
+            border-top: 1px solid #eee;
+            position:absolute;
+            bottom: 0;
+        }
+        .box .user .user-low div{
+            width: 78px;
+            height: 55px;
+            float: left;
+            text-align: center;
+            margin: 0 4px;
+            color: #FF6A00;
+        }
+        .box .user .user-low p{
+            margin: 9px 1px;
+            color: #999999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="banner">
+            <ul class="img-list">
+                <li>
+                    <img src="./images/TB1.jpg" width="1000" height="320">
+                </li>
+                <li>
+                    <img src="./images/TB2.jpg" width="1000" height="320">
+                </li>
+                <li>
+                    <img src="./images/TB3.jpg" width="1000" height="320">
+                </li>
+                <li>
+                    <img src="./images/TB4.jpg" width="1000" height="320">
+                </li>
+                <li>
+                    <img src="./images/TB5.png" width="1000" height="320">
+                </li>
+            </ul>
+            <div class="round">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class="business">
+            <div class="company">
+                <a href="" class="company-list">
+                    <div class="company-title">
+                        公司注册
+                    </div>
+                    <div class="company-desc">
+                        1对1免费咨询,助力创业第一步,部分地区仅需68元
+                    </div>
+                    <img src="./images/TB6.png" class="company-img">
+                </a>
+            </div>
+            <div class="company">
+                <a href="" class="company-list">
+                    <div class="company-title">
+                        公司注册
+                    </div>
+                    <div class="company-desc">
+                        1对1免费咨询,助力创业第一步,部分地区仅需68元
+                    </div>
+                    <img src="./images/TB7.png" class="company-img">
+                </a>
+            </div>
+            <div class="company">
+                <a href="" class="company-list">
+                    <div class="company-title">
+                        公司注册
+                    </div>
+                    <div class="company-desc">
+                        1对1免费咨询,助力创业第一步,部分地区仅需68元
+                    </div>
+                    <img src="./images/TB8.png" class="company-img">
+                </a>
+            </div>
+        </div>
+        <div class="before">
+            <div class="before-img">
+                <img src="./images/TB9.png">
+            </div>
+            <div class="before-title">
+                Hi!欢迎来到阿里云
+            </div>
+            <div class="login-register">
+                <div class="login">
+                    <a href="./login.html">
+                        登录
+                    </a>
+                </div>
+                <div class="register">
+                    <a href="">
+                        注册
+                    </a>
+                </div>
+            </div>
+            <div class="low">
+                <a href="">
+                    全民云计算
+                </a>
+                <span>|</span>
+                <a href="">
+                    免费试用
+                </a>
+            </div>
+        </div>
+        <div class="user">
+            <div class="user-img">
+                <img src="" class="avatar">
+            </div>
+            <div class="user-title"></div>
+            <div class="user-photo">
+                <div class="user-ph">
+                    <a href="">
+                        控制台
+                    </a>
+                </div>
+            </div>
+            <div class="user-fool">
+                <div>
+                    备案专区
+                </div>
+            </div>
+            <div class="user-low">
+                <div>
+                    <span class="num">0</span>
+                    <p>待付款</p>
+                </div>
+                <div>
+                    <span class="num">0</span>
+                    <p>待续费</p>
+                </div>
+                <div>
+                    <span class="integral num"></span>
+                    <p>积分</p>
+                </div>
+                <div>
+                    <span class="num">0</span>
+                    <p>代金劵</p>
+                </div>
+                <div>
+                    <span class="balance num"></span>
+                    <p>账户余额</p>
+                </div>
+                <div>
+                    <span class="mail num">0</span>
+                    <p>站内信</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       var banner = document.getElementsByClassName('banner')[0];
+       var img = banner.getElementsByTagName('img');
+       var li = banner.getElementsByClassName('round')[0].getElementsByTagName('li');
+
+       var num = 0;     //图片索引,第几张图片
+
+       run();
+       timer = setInterval(run, 2000);
+
+       //定时切换图片
+       function run(){
+        //超出图片个数,重置为0,重新从第一张开始计数
+        if(num >= img.length){
+            num = 0;
+        }
+        showImg(num);
+        num++;
+       }
+
+       //显示第n张图片
+       function showImg(n){
+        //隐藏所有图片
+        for(var i = 0;i < img.length;i++){
+            img[i].style.opacity = 0;
+
+            li[i].style.borderColor = '#f40';
+            li[i].style.background = '#f5f5f5';
+        }
+
+        //单独显示第n张
+        img[n].style.opacity = 1;
+        li[n].style.borderColor = '#f5f5f5';
+        li[n].style.background = '#f40';
+       }
+
+       //点第几个小圆圈,就出现第几张图片
+       for(var i = 0;i < li.length;i++){
+            (function(m){
+                li[m].onclick = function(){
+                    clearInterval(timer);
+                    showImg(m);
+                    num = m;        //改变当前图片索引
+                    timer = setInterval(run, 2000);
+                }
+            })(i);
+       }
+
+       $(function(){
+            var token = localStorage.getItem("token");
+            if(token != null){
+                $.ajax({
+                    type:"get",
+                    data:{token:token},
+                    dataType:"json",
+                    url:"http://playground.it266.com/profile",
+                    success:function(result){
+                        console.log(result)
+                        $(".before").hide()
+                        $(".user").show()
+                        $(".user-title").html(result.data.username)
+                        $(".avatar").attr("src",result.data.avatar)
+                        $(".integral").html(result.data.point)
+                        $(".mail").html(result.data.message)
+                        $(".balance").html(result.data.balance)
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

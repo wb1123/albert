@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="./images/jquery-3.4.1.min.js"></script>
+    <style>
+        .box{
+            width: 350px;
+            height: 350px;
+            margin: 50px auto;
+        }
+        .box span{
+            font-size: 30px;
+            color: #555;
+        }
+        .box .err{
+                width: 350px;
+                height: 35px;
+                border: 1px solid  #FF6A00;
+                margin: 10px auto;
+                text-indent: 1em;
+        }
+        .box .err span{
+                font-size: 20px;
+                color: red;
+                line-height: 35px;
+        }
+        .box input{
+                width: 350px;
+                height: 50px;
+                margin: 16px auto;
+                font-size: 16px;
+                text-indent: 1em;
+        }
+        .box button{
+                width: 350px;
+                height: 60px;
+                background-color:  #FF6A00;
+                font-size: 20px;
+                color:white;
+                margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>
+            <b>
+            密码登录
+            </b>
+        </span>
+        <div class="err" style="display: none">
+            <span>
+            登录名或登录密码不正确
+            </span>
+        </div>
+        <div>
+            <input type="text" class="username" placeholder="邮箱/会员名/8位ID">
+        </div>
+        <div>
+            <input type="password" class="password" placeholder="请输入登录密码">
+        </div>
+        <button class="js-login">登录</button>
+    </div>
+<script>
+   $(function () {
+        $(".js-login").click(function () {
+            var username = $(".username").val()
+            var password = $(".password").val()
+           if (username.length == 0) {
+                $(".err").toggle();
+                return
+            }
+            $.ajax({
+                type: "POST",
+                url: "http://playground.it266.com/login",
+                data: {"username": username, "password": password},
+                dataType: "json",
+                success: function (result) {
+                    if (result.status == true) {
+                       location.href="登录功能.html";
+                       window.localStorage.setItem('token',result.data.token);
+                    }else{ 
+                        $(".err").toggle();
+                        return
+                    }
+                },
+                error: function () {
+                    alert("出错了")
+                }
+            })                       
+        })
+    })
+</script>
+</body>
+</html>
