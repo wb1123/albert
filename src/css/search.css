@@ -1,0 +1,33 @@
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+#searc{
+    width: 100%;
+}
+#searc .ss{
+    width: 500px;
+    height: 50px;
+    margin: 0 auto;
+}
+#searc .ss input{
+    width: 435px;
+    height: 50px;
+    float: left;
+    background-color: azure;
+    outline: none;
+    border-style: none;
+    border-radius: 5px;
+    font-size: 22px;
+    color: grey;
+    text-indent: 1em;
+}
+#searc .ss img{
+    width: 40px;
+    height: 40px;
+    float: right;
+    opacity: .8;
+    cursor: pointer;
+    margin: 6px 0 0 0;
+}
