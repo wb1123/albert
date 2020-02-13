@@ -1,0 +1,24 @@
+body,ul,li,img{
+    margin: 0;
+    padding: 0;
+}
+#article{
+    width: 100%;
+    height: 120px;
+    margin-top: 15px;
+}
+#article .art-list{
+    width: 500px;
+    height: 120px;
+    margin: 0 auto;
+    border-bottom: 1px solid #efeff0;
+}
+#article .art-list .text{
+    font-size: 13px;
+    float: left;
+}
+#article .art-list img{
+    width: 180px;
+    height: 100px;
+    float: right;
+}
